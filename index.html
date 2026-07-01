@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1510">
+  <title>Melaspas — Hachi Villa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Noto+Sans+Balinese&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --overlay: rgba(0, 0, 0, 0.55);
+      --overlay-heavy: rgba(0, 0, 0, 0.65);
+      --border: rgba(255, 255, 255, 0.85);
+      --script: 'Great Vibes', cursive;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', sans-serif;
+      --max-w: 430px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--white);
+      background: #0d0b09;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (min-width: 431px) {
+      body {
+        background: linear-gradient(135deg, #1a1510 0%, #0d0b09 50%, #1a1510 100%);
+      }
+    }
+
+    /* ── Section base ── */
+    .section {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 28px 56px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-align: center;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+      z-index: 0;
+    }
+
+    .section__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Typography helpers ── */
+    .script {
+      font-family: var(--script);
+      font-weight: 400;
+    }
+
+    .serif {
+      font-family: var(--serif);
+    }
+
+    .label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      z-index: 2;
+      touch-action: manipulation;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn--outline {
+      font-family: var(--script);
+      font-size: 1.35rem;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 36px;
+      min-width: 200px;
+    }
+
+    .btn--solid {
+      font-family: var(--script);
+      font-size: 1.25rem;
+      color: #1a1510;
+      background: var(--white);
+      border-radius: 50px;
+      padding: 12px 32px;
+      min-width: 220px;
+      margin-top: 8px;
+    }
+
+    .btn--solid:hover,
+    .btn--outline:hover {
+      opacity: 0.92;
+    }
+
+    /* ── Section 1: Hero ── */
+    .hero {
+      background-image: url('assets/hero.jpeg');
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 0 clamp(20px, 6vw, 32px) clamp(28px, 6vh, 44px);
+      min-height: 100svh;
+      min-height: 100dvh;
+    }
+
+    .hero .section__inner {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: clamp(96px, 20vh, 140px);
+      padding-bottom: clamp(24px, 5vh, 40px);
+      box-sizing: border-box;
+    }
+
+    .hero__top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(18px, 4.5vh, 28px);
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .hero .label {
+      margin-bottom: clamp(4px, 1vh, 8px);
+    }
+
+    .hero__logo {
+      width: clamp(44px, 12vw, 52px);
+      height: clamp(44px, 12vw, 52px);
+      opacity: 0.95;
+      margin-top: clamp(4px, 1vh, 10px);
+      display: block;
+    }
+
+    .hero__logo-text {
+      font-family: 'Noto Sans JP', 'Segoe UI', sans-serif;
+      font-size: 44px;
+      font-weight: 400;
+      fill: white;
+      letter-spacing: 0;
+    }
+
+    .hero__title {
+      font-size: clamp(2.6rem, 11vw, 3.6rem);
+      line-height: 1.05;
+      margin-top: clamp(6px, 1.5vh, 12px);
+    }
+
+    .hero__date {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: clamp(0.82rem, 3.2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      margin-top: clamp(8px, 2vh, 14px);
+      padding: 10px clamp(20px, 6vw, 32px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+    }
+
+    .hero__recipient {
+      margin-top: clamp(32px, 8vh, 52px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 3.5vh, 20px);
+      width: 100%;
+    }
+
+    .hero__greeting {
+      font-size: clamp(1rem, 4.2vw, 1.15rem);
+      opacity: 0.95;
+    }
+
+    .hero__guest {
+      font-family: var(--serif);
+      font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+      font-style: italic;
+      letter-spacing: 0.04em;
+      min-height: 1.4em;
+    }
+
+    .hero .btn--outline {
+      font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+      padding: 10px clamp(28px, 8vw, 36px);
+      min-width: min(200px, 85%);
+      width: auto;
+    }
+
+    .scroll-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: clamp(48px, 12vh, 80px);
+      animation: bounce 2s ease-in-out infinite;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .music-toggle {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.45);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .music-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .scroll-hint svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ── Section 2: Event ── */
+    .event {
+      background-image: url('assets/om.jpeg');
+      min-height: auto;
+      padding: clamp(48px, 12vw, 64px) clamp(18px, 5vw, 28px) clamp(56px, 14vw, 72px);
+    }
+
+    .event .section__inner {
+      max-width: 340px;
+      width: 100%;
+    }
+
+    .event__greeting {
+      font-size: clamp(2.2rem, 9.5vw, 3.1rem);
+      line-height: 1.15;
+    }
+
+    .event__symbol {
+      display: block;
+      width: clamp(56px, 18vw, 88px);
+      height: auto;
+      margin: clamp(8px, 2.5vw, 12px) auto clamp(16px, 4vw, 22px);
+      opacity: 0.92;
+    }
+
+    .event__intro {
+      font-family: var(--serif);
+      font-size: clamp(0.85rem, 3.6vw, 0.95rem);
+      line-height: 1.75;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: clamp(22px, 5vw, 32px);
+      font-weight: 400;
+    }
+
+    .date-box {
+      display: grid;
+      grid-template-columns: minmax(88px, 1fr) minmax(0, 1.45fr);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 340px;
+      margin-bottom: clamp(20px, 5vw, 28px);
+      background: rgba(0, 0, 0, 0.25);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .date-box__left {
+      border-right: 1px solid var(--border);
+      padding: clamp(14px, 4vw, 20px) clamp(8px, 2.5vw, 12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .date-box__month {
+      font-family: var(--serif);
+      font-size: clamp(0.88rem, 3.5vw, 1rem);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    .date-box__day {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 10vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .date-box__right {
+      padding: clamp(12px, 3.5vw, 16px) clamp(12px, 3.5vw, 18px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      gap: clamp(6px, 2vw, 8px);
+    }
+
+    .date-box__time {
+      font-family: var(--serif);
+      font-size: clamp(0.82rem, 3.4vw, 0.95rem);
+      font-weight: 500;
+    }
+
+    .date-box__address {
+      font-family: var(--serif);
+      font-size: clamp(0.72rem, 3vw, 0.82rem);
+      line-height: 1.55;
+      opacity: 0.92;
+    }
+
+    .event .btn--solid {
+      font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+      padding: 12px clamp(24px, 7vw, 32px);
+      min-width: min(220px, 90%);
+      width: auto;
+    }
+
+    .event__closing {
+      font-family: var(--serif);
+      font-size: clamp(0.8rem, 3.4vw, 0.88rem);
+      line-height: 1.75;
+      width: 100%;
+      max-width: 320px;
+      margin-top: clamp(20px, 5vw, 28px);
+      opacity: 0.92;
+    }
+
+    .event__closing + .event__closing {
+      margin-top: 16px;
+    }
+
+    /* ── Section 3: Owner ── */
+    .owner {
+      background-image: url('assets/owner.jpeg');
+      min-height: 100svh;
+      padding: 64px 28px 72px;
+    }
+
+    .owner__heading {
+      font-size: clamp(2.75rem, 11vw, 3.5rem);
+      margin-bottom: 48px;
+    }
+
+    .owner__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .owner__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .owner__photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .owner__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .owner__name {
+      font-size: 1.35rem;
+      line-height: 1.3;
+      max-width: 260px;
+    }
+
+    /* ── Section 4: Location ── */
+    .location {
+      background-image: url('assets/penutup.jpeg');
+      min-height: auto;
+      padding: 64px 24px 80px;
+    }
+
+    .location__maps-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+
+    .location__heading {
+      font-size: clamp(2.5rem, 10vw, 3.25rem);
+      margin-bottom: 20px;
+    }
+
+    .location__address {
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      max-width: 300px;
+      margin-bottom: 24px;
+      opacity: 0.92;
+    }
+
+    .location__map {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+      background: var(--white);
+      text-decoration: none;
+    }
+
+    .location__map img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .location__thankyou {
+      font-size: clamp(3rem, 13vw, 4rem);
+      margin-top: 56px;
+      line-height: 1;
+    }
+
+    /* ── Entrance animation ── */
+    .section__inner > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+
+    .section.visible .section__inner > * {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .section.visible .section__inner > *:nth-child(1) { transition-delay: 0.05s; }
+    .section.visible .section__inner > *:nth-child(2) { transition-delay: 0.12s; }
+    .section.visible .section__inner > *:nth-child(3) { transition-delay: 0.19s; }
+    .section.visible .section__inner > *:nth-child(4) { transition-delay: 0.26s; }
+    .section.visible .section__inner > *:nth-child(5) { transition-delay: 0.33s; }
+    .section.visible .section__inner > *:nth-child(6) { transition-delay: 0.4s; }
+    .section.visible .section__inner > *:nth-child(7) { transition-delay: 0.47s; }
+    .section.visible .section__inner > *:nth-child(8) { transition-delay: 0.54s; }
+
+    .hero .section__inner > * {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .hero.opened .section__inner > * {
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <button class="music-toggle" id="musicToggle" type="button" aria-label="Putar backsound">♫</button>
+    <audio id="bgAudio" loop preload="auto">
+      <source src="assets/Backstreet-Boys-Shape-of-My-Heart.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Section 1: Hero -->
+    <section class="section hero" id="hero">
+      <div class="section__inner">
+        <div class="hero__top">
+          <p class="label">Melaspas</p>
+
+          <svg class="hero__logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" class="hero__logo-text">八</text>
+          </svg>
+
+          <h1 class="hero__title script">Hachi Villa</h1>
+          <p class="hero__date">07 &ndash; 07 &ndash; 2026</p>
+
+          <div class="hero__recipient">
+            <p class="hero__greeting script">Yth. Bapak/Ibu/Saudara/i</p>
+            <p class="hero__guest" id="guestName">&nbsp;</p>
+            <button class="btn btn--outline" id="openBtn" type="button">Buka Undangan</button>
+          </div>
+        </div>
+
+        <a class="scroll-hint" href="#event" aria-label="Scroll ke bawah">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section 2: Event Details -->
+    <section class="section event" id="event">
+      <div class="section__inner">
+        <h2 class="event__greeting script">Om Swastiastu</h2>
+
+        <img class="event__symbol" src="assets/aksara.png" alt="" aria-hidden="true">
+
+        <p class="event__intro">
+          Atas Asung Kerta Wara Nugraha Ida Sang Hyang Widhi Wasa/ Tuhan Yang Maha Esa, Kami bermaksud akan menyelenggarakan Acara Melaspas pada :
+        </p>
+
+        <div class="date-box">
+          <div class="date-box__left">
+            <span class="date-box__month">July</span>
+            <span class="date-box__day">07</span>
+          </div>
+          <div class="date-box__right">
+            <span class="date-box__time">16.00 WITA &ndash; Selesai</span>
+            <span class="date-box__address">
+              Gg. Drupadi, Sibangkaja, Abiansemal,<br>
+              Badung, Bali 80352
+            </span>
+          </div>
+        </div>
+
+        <button class="btn btn--solid" id="calendarBtn" type="button">Simpan ke Kalender</button>
+
+        <p class="event__closing">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
+          berkenan hadir untuk memberikan doa restu.
+        </p>
+        <p class="event__closing">
+          Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami ucapkan terima kasih.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Owner -->
+    <section class="section owner" id="owner">
+      <div class="section__inner">
+        <h2 class="owner__heading script">Owner</h2>
+
+        <div class="owner__list">
+          <div class="owner__item">
+            <div class="owner__photo" aria-hidden="true">
+              <img src="assets/owner.jpeg" alt="">
+            </div>
+            <p class="owner__name script">I Wayan Wirata</p>
+          </div>
+
+          <div class="owner__item">
+            <div class="owner__photo" aria-hidden="true">
+              <img src="assets/owner.jpeg" alt="">
+            </div>
+            <p class="owner__name script">Ni Wayan Pradnyani S.E.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Location -->
+    <section class="section location" id="location">
+      <div class="section__inner">
+        <p class="location__maps-label label">Google Maps</p>
+        <h2 class="location__heading script">Lokasi Acara</h2>
+
+        <p class="location__address">
+          Gg. Drupadi, Sibangkaja, Abiansemal,<br>
+           Badung, Bali 80352
+        </p>
+
+        <a
+          class="location__map"
+          href="https://maps.app.goo.gl/Y2rTJ176TAZqwQQ19"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Buka lokasi di Google Maps"
+        >
+          <img src="assets/maps.png" alt="Peta lokasi Hachi Villa, Jl. Gangga Penarungan">
+        </a>
+
+        <a
+          class="btn btn--solid"
+          href="https://maps.app.goo.gl/Y2rTJ176TAZqwQQ19"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Buka Maps</a>
+
+        <p class="location__thankyou script">Thank You</p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var guest = params.get('to') || params.get('nama') || '';
+      var guestEl = document.getElementById('guestName');
+      if (guest && guestEl) {
+        guestEl.textContent = decodeURIComponent(guest.replace(/\+/g, ' '));
+      } else if (guestEl) {
+        guestEl.style.display = 'none';
+      }
+
+      var openBtn = document.getElementById('openBtn');
+      var hero = document.getElementById('hero');
+      var eventSection = document.getElementById('event');
+      var musicToggle = document.getElementById('musicToggle');
+      var bgAudio = document.getElementById('bgAudio');
+      var musicPlaying = false;
+
+      if (musicToggle && bgAudio) {
+        musicToggle.addEventListener('click', function () {
+          if (musicPlaying) {
+            bgAudio.pause();
+            musicPlaying = false;
+            musicToggle.textContent = '♫';
+          } else {
+            bgAudio.play().catch(function () {});
+            musicPlaying = true;
+            musicToggle.textContent = '⏸';
+          }
+        });
+      }
+
+      openBtn.addEventListener('click', function () {
+        hero.classList.add('opened');
+        eventSection.classList.add('visible');
+        eventSection.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      var calendarBtn = document.getElementById('calendarBtn');
+      var eventLocation = 'Gg. Drupadi, Sibangkaja, Abiansemal, Badung, Bali 80352';
+      var googleCalUrl =
+        'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+        '&text=' + encodeURIComponent('Melaspas Hachi Villa') +
+        '&dates=20240707T080000Z/20240707T120000Z' +
+        '&details=' + encodeURIComponent('Upacara Melaspas Hachi Villa') +
+        '&location=' + encodeURIComponent(eventLocation);
+
+      calendarBtn.addEventListener('click', function () {
+        var ics = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Hachi Villa//Melaspas//ID',
+          'CALSCALE:GREGORIAN',
+          'METHOD:PUBLISH',
+          'BEGIN:VEVENT',
+          'UID:melaspas-hachi-villa-20240707@hachivilla',
+          'DTSTAMP:20240707T080000Z',
+          'DTSTART:20240707T080000Z',
+          'DTEND:20240707T120000Z',
+          'SUMMARY:Melaspas Hachi Villa',
+          'DESCRIPTION:Upacara Melaspas Hachi Villa',
+          'LOCATION:' + eventLocation,
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ].join('\r\n');
+
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+          window.location.href = googleCalUrl;
+          return;
+        }
+
+        var blob = new Blob(['\ufeff' + ics], { type: 'text/calendar;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'melaspas-hachi-villa.ics';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(function () {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }, 200);
+      });
+
+      var sections = document.querySelectorAll('.section:not(.hero)');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        sections.forEach(function (section) {
+          observer.observe(section);
+        });
+      } else {
+        sections.forEach(function (section) {
+          section.classList.add('visible');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
